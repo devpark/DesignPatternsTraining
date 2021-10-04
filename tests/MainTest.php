@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 namespace App\Tests;
 
+use App\Countries;
 use PHPUnit\Framework\TestCase;
 use App\Main;
 
@@ -15,7 +16,7 @@ class MainTest extends TestCase
     public function start_needToPayPL()
     {
         $main  = new Main();
-        $result = $main->start("PL", 50);
+        $result = $main->start(Countries::PL, 50);
 
         $this->assertEquals('25PLN', $result);
     }
@@ -29,7 +30,7 @@ class MainTest extends TestCase
     public function start_needToPayPLDiscount()
     {
         $main  = new Main();
-        $result = $main->start("PL", 50, 10);
+        $result = $main->start(Countries::PL, 50, 10);
 
         $this->assertEquals('15PLN', $result);
     }
@@ -43,7 +44,7 @@ class MainTest extends TestCase
     public function start_needToPayPLDiscountANDPremiumBox()
     {
         $main  = new Main();
-        $result = $main->start("PL", 50, 10, 'PREMIUM_BOX');
+        $result = $main->start(Countries::PL, 50, 10, 'PREMIUM_BOX');
 
         $this->assertEquals('55PLN', $result);
     }
@@ -57,7 +58,7 @@ class MainTest extends TestCase
     public function start_freeShippingPL()
     {
         $main  = new Main();
-        $result = $main->start("PL", 150);
+        $result = $main->start(Countries::PL, 150);
 
         $this->assertEquals('0PLN', $result);
     }
@@ -71,7 +72,7 @@ class MainTest extends TestCase
     public function start_freeShippingUK()
     {
         $main  = new Main();
-        $result = $main->start("UK", 450);
+        $result = $main->start(Countries::UK, 450);
 
         $this->assertEquals('0GBP', $result);
     }
@@ -85,7 +86,7 @@ class MainTest extends TestCase
     public function start_freeShippingUK_championsBox()
     {
         $main  = new Main();
-        $result = $main->start("UK", 450, 0, 'UEFA_CHAMPION');
+        $result = $main->start(Countries::UK, 450, 0, 'UEFA_CHAMPION');
 
         $this->assertEquals('40GBP', $result);
     }
@@ -99,7 +100,7 @@ class MainTest extends TestCase
     public function start_freeShippingUs()
     {
         $main  = new Main();
-        $result = $main->start("US", 2450);
+        $result = $main->start(Countries::US, 2450);
 
         $this->assertEquals('$0', $result);
     }
@@ -113,7 +114,7 @@ class MainTest extends TestCase
     public function start_costForUnknowCountries()
     {
         $main  = new Main();
-        $result = $main->start("Nigeria", 2450);
+        $result = $main->start(Countries::NIGERIA, 2450);
 
         $this->assertEquals('ETH299', $result);
     }
