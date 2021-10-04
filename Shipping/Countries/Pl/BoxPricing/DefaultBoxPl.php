@@ -6,6 +6,7 @@ namespace App\Shipping\Countries\Pl\BoxPricing;
 use App\Contracts\IBoxingCalculation;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingBox;
+use App\Currencies;
 use App\Shipping\PriceFactory;
 
 class DefaultBoxPl implements IBoxingCalculation
@@ -19,7 +20,7 @@ class DefaultBoxPl implements IBoxingCalculation
 
     public function calculate(IShippingBox $boxing_properties): IPrice
     {
-        return $this->price_factory->create("PLN", $this->getCountryPrice());
+        return $this->price_factory->create(Currencies::PLN, $this->getCountryPrice());
     }
 
     protected function getCountryPrice()

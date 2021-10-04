@@ -6,6 +6,7 @@ namespace App\Shipping\Countries\OtherCountries\BoxPricing;
 use App\Contracts\IBoxingCalculation;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingBox;
+use App\Currencies;
 use App\Shipping\PriceFactory;
 
 class DefaultBoxWorld implements IBoxingCalculation
@@ -19,7 +20,7 @@ class DefaultBoxWorld implements IBoxingCalculation
 
     public function calculate(IShippingBox $boxing_properties): IPrice
     {
-        return $this->price_factory->create("ETH", $this->getCountryPrice());
+        return $this->price_factory->create(Currencies::ETH, $this->getCountryPrice());
     }
 
     protected function getCountryPrice()

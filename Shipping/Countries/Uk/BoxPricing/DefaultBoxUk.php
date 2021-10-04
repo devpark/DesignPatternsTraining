@@ -6,6 +6,7 @@ namespace App\Shipping\Countries\Uk\BoxPricing;
 use App\Contracts\IBoxingCalculation;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingBox;
+use App\Currencies;
 use App\Shipping\CommonCalculations\BoxPricing\PremiumBox;
 use App\Shipping\PriceFactory;
 
@@ -20,7 +21,7 @@ class DefaultBoxUk implements IBoxingCalculation
 
     public function calculate(IShippingBox $boxing_properties): IPrice
     {
-        return $this->price_factory->create("GBP", $this->getCountryPrice());
+        return $this->price_factory->create(Currencies::GBP, $this->getCountryPrice());
     }
 
     protected function getCountryPrice()

@@ -2,11 +2,12 @@
 namespace App\Shipping\Countries\Us;
 
 use App\Contracts\IPrice;
+use App\Currencies;
 use App\Shipping\CommonCalculations\Price;
 
 class PriceUs extends Price
 {
-    private $currency_code = '$';
+    private $currency_code = Currencies::US;
 
     public function __construct(float $value)
     {
