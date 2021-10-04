@@ -2,6 +2,8 @@
 namespace App\Shipping;
 
 use App\Contracts\IPrice;
+use App\Countries;
+use App\Currencies;
 use App\Shipping\Countries\OtherCountries\PriceWorld;
 use App\Shipping\Countries\Pl\PricePl;
 use App\Shipping\Countries\Uk\PriceUk;
@@ -13,12 +15,15 @@ class PriceFactory
     {
         switch ($country_code)
         {
-            case "PLN":
+            case Currencies::PLN:
                 return new PricePl($value);
-            case "GBP":
+
+            case Currencies::GBP:
                 return new PriceUk($value);
-            case "$":
+
+            case Currencies::US:
                 return new PriceUs($value);
+
             default:
                 return new PriceWorld($value);
         }
