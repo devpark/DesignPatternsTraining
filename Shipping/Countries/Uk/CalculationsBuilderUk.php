@@ -2,9 +2,8 @@
 namespace App\Shipping\Countries\Uk;
 
 use App\Contracts\IBoxingCalculation;
-use App\Contracts\ICountryShippingCalc;
-use App\Contracts\IShippingBox;
-use App\Shipping\Countries\CalculationsBuilder;
+
+use App\Shipping\CommonCalculations\CalculationsBuilder;
 use App\Shipping\Countries\Uk\BoxPricing\DefaultBoxUk;
 use App\Shipping\Countries\Uk\BoxPricing\PremiumBoxUk;
 use App\Shipping\Countries\Uk\BoxPricing\UefaChampionBox;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Shipping\Countries;
+namespace App\Shipping\CommonCalculations;
 
 use App\Contracts\IBoxingCalculation;
 use App\Contracts\ICalculationsBuilder;
@@ -7,9 +7,6 @@ use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingBox;
 use App\Contracts\IShippingOrder;
-use App\Shipping\CommonCalculations\ClientShippingDiscount;
-use App\Shipping\CommonCalculations\FreeDeliveryDays;
-
 
 
 abstract class CalculationsBuilder implements ICalculationsBuilder

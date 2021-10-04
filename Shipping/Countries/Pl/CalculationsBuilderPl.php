@@ -2,9 +2,7 @@
 namespace App\Shipping\Countries\Pl;
 
 use App\Contracts\IBoxingCalculation;
-use App\Contracts\ICountryShippingCalc;
-use App\Contracts\IShippingBox;
-use App\Shipping\Countries\CalculationsBuilder;
+use App\Shipping\CommonCalculations\CalculationsBuilder;
 use App\Shipping\Countries\Pl\BoxPricing\DefaultBoxPl;
 use App\Shipping\Countries\Pl\BoxPricing\PremiumBoxPl;
 

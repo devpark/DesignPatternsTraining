@@ -2,7 +2,7 @@
 namespace App\Shipping\Countries\OtherCountries;
 
 use App\Contracts\IBoxingCalculation;
-use App\Shipping\Countries\CalculationsBuilder;
+use App\Shipping\CommonCalculations\CalculationsBuilder;
 use App\Shipping\Countries\OtherCountries\BoxPricing\DefaultBoxWorld;
 use App\Shipping\Countries\OtherCountries\BoxPricing\PremiumBoxWorld;
 
