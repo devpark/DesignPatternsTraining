@@ -6,4 +6,5 @@ interface IPrice {
     public function getValue();
     public function getCurrencyCode();
     public function getFomatedValue();
+    public function add(IPrice $value):IPrice;
 }

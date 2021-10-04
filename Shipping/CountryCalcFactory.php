@@ -4,6 +4,7 @@
 namespace App\Shipping;
 
 use App\Contracts\ICalculationsBuilder;
+use App\Contracts\IShippingBox;
 use App\Contracts\IShippingOrder;
 use App\Shipping\Countries\CalculationsBuilder;
 use App\Shipping\Countries\OtherCountries\BoxPricing\PremiumBoxWorld;
@@ -26,27 +27,26 @@ use App\Shipping\Countries\Us\PriceUs;
 
 class CountryCalcFactory
 {
-    public function create(IShippingOrder $order): ICalculationsBuilder
+    public function create(IShippingOrder $order, IShippingBox $boxing_properties): ICalculationsBuilder
     {
 
         switch ($order->getCountry())
         {
             case "PL":
                 $order_total = new OrderTotalPl();
-                return new CalculationsBuilderPl($order, $order_total);
+                return new CalculationsBuilderPl($order, $order_total, $boxing_properties);
 
             case "UK":
                 $order_total = new OrderTotalUk();
-                return new CalculationsBuilderUk($order, $order_total);
+                return new CalculationsBuilderUk($order, $order_total, $boxing_properties);
 
             case "US":
                 $order_total = new OrderTotalUs();
-                return new CalculationsBuilderUs($order, $order_total);
+                return new CalculationsBuilderUs($order, $order_total, $boxing_properties);
 
             default:
-
                 $order_total = new OrderTotalWorld();
-                return new CalculationsBuilderWorld($order, $order_total);
+                return new CalculationsBuilderWorld($order, $order_total, $boxing_properties);
 
         }
     }

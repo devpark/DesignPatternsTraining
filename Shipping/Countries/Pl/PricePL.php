@@ -2,10 +2,10 @@
 namespace App\Shipping\Countries\Pl;
 
 use App\Contracts\IPrice;
+use App\Shipping\CommonCalculations\Price;
 
-class PricePl implements IPrice
+class PricePl extends Price implements IPrice
 {
-    private $value = 0;
     private $currency_code = 'PLN';
 
     public function __construct(float $value)
@@ -27,4 +27,5 @@ class PricePl implements IPrice
     {
         return $this->value.$this->currency_code;
     }
+
 }

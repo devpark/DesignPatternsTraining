@@ -2,10 +2,10 @@
 namespace App\Shipping\Countries\Uk;
 
 use App\Contracts\IPrice;
+use App\Shipping\CommonCalculations\Price;
 
-class PriceUk implements IPrice
+class PriceUk extends Price
 {
-    private $value = 0;
     private $currency_code = 'GBP';
 
     public function __construct(float $value)

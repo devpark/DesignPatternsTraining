@@ -1,17 +1,20 @@
 <?php
 namespace App\Shipping\Countries\Us;
 
+use App\Contracts\IBoxingCalculation;
 use App\Contracts\ICountryShippingCalc;
 use App\Shipping\Countries\CalculationsBuilder;
+use App\Shipping\Countries\Us\BoxPricing\DefaultBoxUs;
 use App\Shipping\Countries\Us\BoxPricing\PremiumBoxUs;
 
 
 class CalculationsBuilderUs extends CalculationsBuilder
 {
 
-    public function useBoxPricing(ICountryShippingCalc $calculations_component):ICountryShippingCalc
+    public function useBoxPricing():IBoxingCalculation
     {
-        $box_price_decorator = new PremiumBoxUs($calculations_component);
+        $default_box = new DefaultBoxUs($this->boxing_properties);
+        $box_price_decorator = new PremiumBoxUs($default_box);
 
         return $box_price_decorator;
     }

@@ -1,9 +1,11 @@
 <?php
 namespace App\Shipping\Countries;
 
+use App\Contracts\IBoxingCalculation;
 use App\Contracts\ICalculationsBuilder;
 use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
+use App\Contracts\IShippingBox;
 use App\Contracts\IShippingOrder;
 use App\Shipping\CommonCalculations\ClientShippingDiscount;
 use App\Shipping\CommonCalculations\FreeDeliveryDays;
@@ -14,11 +16,13 @@ abstract class CalculationsBuilder implements ICalculationsBuilder
 {
     protected IShippingOrder $order;
     protected ICountryShippingCalc $order_total;
+    protected IShippingBox $boxing_properties;
 
-    public function __construct(IShippingOrder $order, ICountryShippingCalc $order_total)
+    public function __construct(IShippingOrder $order, ICountryShippingCalc $order_total, IShippingBox $boxing_properties)
     {
         $this->order = $order;
         $this->order_total = $order_total;
+        $this->boxing_properties = $boxing_properties;
     }
 
     public function useShippingDiscounts(ICountryShippingCalc $calculations_component):ICountryShippingCalc
@@ -34,8 +38,12 @@ abstract class CalculationsBuilder implements ICalculationsBuilder
         return $this->order_total;
     }
 
-    public function makeCalculations(ICountryShippingCalc $calculations_component): IPrice
+    public function makeCalculations(ICountryShippingCalc $calculations_component, IBoxingCalculation $boxing_component): IPrice
     {
-        return $calculations_component->calculate($this->order);
+        $shipping_cost = $calculations_component->calculate($this->order);
+        $boxing_cost =  $boxing_component->calculate($this->boxing_properties);
+
+        //todo
+        return $shipping_cost->add($boxing_cost);
     }
 }

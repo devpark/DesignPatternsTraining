@@ -2,10 +2,10 @@
 namespace App\Shipping\Countries\OtherCountries;
 
 use App\Contracts\IPrice;
+use App\Shipping\CommonCalculations\Price;
 
-class PriceWorld implements IPrice
+class PriceWorld extends Price
 {
-    private $value = 0;
     private $currency_code = 'ETH';
 
     public function __construct(float $value)

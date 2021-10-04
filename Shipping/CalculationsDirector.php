@@ -26,8 +26,8 @@ class CalculationsDirector implements ICalculate
         $discount_decorations = $this->calc_builder->useShippingDiscounts($calculator);
 
         //other calculations
-        $boxing_decorations = $this->calc_builder->useBoxPricing($discount_decorations);
+        $boxing_decorations = $this->calc_builder->useBoxPricing();
 
-        return $this->calc_builder->makeCalculations($boxing_decorations);
+        return $this->calc_builder->makeCalculations($discount_decorations, $boxing_decorations);
     }
 }
