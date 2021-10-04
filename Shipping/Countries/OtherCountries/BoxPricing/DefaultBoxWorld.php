@@ -3,28 +3,18 @@
 
 namespace App\Shipping\Countries\OtherCountries\BoxPricing;
 
-use App\Contracts\IBoxingCalculation;
-use App\Contracts\IPrice;
-use App\Contracts\IShippingBox;
 use App\Currencies;
-use App\Shipping\PriceFactory;
+use App\Shipping\CommonCalculations\BoxPricing\DefaultBox;
 
-class DefaultBoxWorld implements IBoxingCalculation
+class DefaultBoxWorld extends DefaultBox
 {
-    protected $price_factory ;
-
-    public function __construct()
-    {
-        $this->price_factory = new PriceFactory();
-    }
-
-    public function calculate(IShippingBox $boxing_properties): IPrice
-    {
-        return $this->price_factory->create(Currencies::ETH, $this->getCountryPrice());
-    }
-
     protected function getCountryPrice()
     {
         return 0;
+    }
+
+    protected function getCurrency()
+    {
+        return Currencies::ETH;
     }
 }
