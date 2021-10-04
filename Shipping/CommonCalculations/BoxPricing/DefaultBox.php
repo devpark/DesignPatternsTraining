@@ -6,7 +6,6 @@ namespace App\Shipping\CommonCalculations\BoxPricing;
 use App\Contracts\IBoxingCalculation;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingBox;
-use App\Currencies;
 use App\Shipping\PriceFactory;
 
 abstract class DefaultBox implements IBoxingCalculation
