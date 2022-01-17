@@ -15,11 +15,15 @@ class Order
 {
     private $country = "PL";
     private $total = 50;
+    private $shipping_discount = 0;
+    private $box_type = "DEFAULT";
 
-    public function __construct($country_code, $total)
+    public function __construct($country_code, $total, $shipping_discount, $box_type)
     {
         $this->country = $country_code;
         $this->total = $total;
+        $this->shipping_discount = $shipping_discount;
+        $this->box_type = $box_type;
     }
 
     public function getCountry()
@@ -48,7 +52,7 @@ class Order
 
     public function getClientShippingDiscountPL()
     {
-        return 10;
+        return $this->shipping_discount;
     }
 
     public function getClientShippingDiscountEU()
@@ -60,4 +64,11 @@ class Order
     {
         return 0;
     }
+
+    public function boxType()
+    {
+        return $this->box_type;
+    }
+    //please assume that there will be a lot more of code inside of this class
+    //imagine the worst code which you ever seen... this one is worse
 }

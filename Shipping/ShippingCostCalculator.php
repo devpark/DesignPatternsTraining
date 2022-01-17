@@ -1,43 +1,21 @@
 <?php
 namespace App\Shipping;
 
-use App\Orders\Order;
+use App\Contracts\ICountryShippingCalc;
+use App\Contracts\IPrice;
+use App\Contracts\IShippingBox;
+use App\Contracts\IShippingOrder;
+
+use App\Shipping\Countries\Us\PriceUs;
 
 class ShippingCostCalculator
 {
-    public function calculate(Order $order)
+    public function calculate(IShippingOrder $order, IShippingBox $boxing_properties):IPrice
     {
-        $country = $order->getCountry();
+        $calc_factory = new CountryCalcFactory();
+        $country_calculations_builder = $calc_factory->create($order, $boxing_properties);
+        $calculations_director = new CalculationsDirector($country_calculations_builder);
 
-        switch($country)
-        {
-            case "PL":
-                $total = $order->getTotalPl();
-                if($total > 100)
-                {
-                    return '0PLN';
-                }
-                //there will be more logic in the future
-                return '25PLN';
-
-            case "UK":
-                $total = $order->getTotalUk();
-
-                if($total > 300)
-                {
-                    return '0'."GBP";
-                }
-                //there will be more logic in the future
-                return '25'."GBP";
-            case "US":
-                $total = $order->getTotalUs();
-
-                if($total > 1000)
-                {
-                    return '$0';
-                }
-                //there will be more logic in the future
-                return '$250';
-        }
+        return $calculations_director->calculate();
     }
 }
